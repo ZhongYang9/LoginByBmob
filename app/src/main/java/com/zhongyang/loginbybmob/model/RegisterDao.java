@@ -62,7 +62,10 @@ public class RegisterDao implements IRegisterDaoImpl {
                 } else {
                     int errorCode = e.getErrorCode();
                     Log.d(TAG, "查询失败，错误码 ==> " + errorCode + "错误信息 ==> " + e.toString());
-                    //TODO 需要对错误码进行一个判断，然后才将查询数据失败的结果通知到P层
+                    //将查询数据失败的结果通知到P层
+                    if (mDaoViewCallback != null) {
+                        mDaoViewCallback.queryNetWorkError();
+                    }
                 }
             }
         });

@@ -5,6 +5,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.base.BaseActivity;
 import com.zhongyang.loginbybmob.model.damain.User;
@@ -28,6 +30,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
     @BindView(R.id.et_confirmPwd)
     EditText et_confirmPwd;
     private IRegisterPresenterImpl mRegisterPresenter;
+    @BindView(R.id.cl_loading)
+    ConstraintLayout cl_loading;
+    @BindView(R.id.cl_container)
+    ConstraintLayout cl_container;
 
     //------------------------------继承父类实现的一些方法-------------------------
     @Override
@@ -65,7 +71,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
     //----------------------------注册逻辑层后实现的方法------------------------
     @Override
     public void onCheckUserResult(List<User> users) {
-        //TODO 设置UI状态
+        //设置UI状态
+        cl_loading.setVisibility(View.GONE);
+        cl_container.setVisibility(View.VISIBLE);
         //账号已经存在
         Toast.makeText(this, "该用户已存在", Toast.LENGTH_SHORT).show();
     }
@@ -77,17 +85,25 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
 
     @Override
     public void onQuerying() {
-
+        //设置加载布局未显示状态
+        cl_loading.setVisibility(View.VISIBLE);
+        cl_container.setVisibility(View.GONE);
     }
 
     @Override
     public void onNetWorkError() {
-
+        //设置UI
+        cl_loading.setVisibility(View.GONE);
+        cl_container.setVisibility(View.VISIBLE);
+        //提示用户
+        Toast.makeText(this, "网络错误", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUserIsEmpty() {
-        //TODO 设置UI状态
+        //设置UI状态
+        cl_loading.setVisibility(View.GONE);
+        cl_container.setVisibility(View.VISIBLE);
         //用户不存在，可以进行注册
         Toast.makeText(this, "该账号未注册，可以进行添加操作...", Toast.LENGTH_SHORT).show();
     }

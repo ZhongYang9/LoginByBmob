@@ -43,6 +43,10 @@ public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCa
     //-----------------------------------实现接口动作实现的方法-------------------
     @Override
     public void checkedUser(String account) {
+        //设置UI
+        if (mRegisterViewCallback != null) {
+            mRegisterViewCallback.onQuerying();
+        }
         //请求数据库查询结果
         if (mRegisterDao != null) {
             mRegisterDao.checkUser(account);
@@ -83,7 +87,10 @@ public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCa
 
     @Override
     public void queryNetWorkError() {
-
+        //将网络错误结果通知到UI
+        if (mRegisterViewCallback != null) {
+            mRegisterViewCallback.onNetWorkError();
+        }
     }
 
     @Override
