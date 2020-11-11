@@ -11,7 +11,7 @@ import com.zhongyang.loginbybmob.view.IRegisterViewCallback;
  * @作者 钟阳
  * @描述 注册界面的注动作接口
  */
-public interface IRegisterPresenterImpl extends IRegisterViewCallback {
+public interface IRegisterPresenterImpl{
 
     /**
      * 校验用户是否已经存在
@@ -26,4 +26,18 @@ public interface IRegisterPresenterImpl extends IRegisterViewCallback {
      * @param user 用户实体类对象
      */
     void addUser(User user);
+
+    /**
+     * UI注册接口
+     *
+     * @param callback 接口对象
+     */
+    void registerViewCallback(IRegisterViewCallback callback);
+
+    /**
+     * 取消UI注册接口
+     *
+     * @param callback 接口对象
+     */
+    void unRegisterViewCallback(IRegisterViewCallback callback);
 }
