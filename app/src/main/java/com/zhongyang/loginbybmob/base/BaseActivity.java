@@ -29,8 +29,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         setStatusBar();
         //绑定黄油刀
         ButterKnife.bind(this);
+        //设置逻辑层相关
+        setPresenterData();
         //初始化活动监听事件
         initListenerEvent();
+    }
+
+    /**
+     * 设置逻辑层数据，由子类根据情况自行实现
+     */
+    protected void setPresenterData() {
+
     }
 
     /**

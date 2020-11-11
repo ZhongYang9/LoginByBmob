@@ -1,5 +1,9 @@
 package com.zhongyang.loginbybmob.view;
 
+import com.zhongyang.loginbybmob.model.damain.User;
+
+import java.util.List;
+
 /**
  * @项目名称 LoginByBmob
  * @类名 IRegisterViewCallback
@@ -13,9 +17,9 @@ public interface IRegisterViewCallback {
     /**
      * 校验用户是否存在的结果
      *
-     * @param isExistence 是否存在
+     * @param users 实体类对象
      */
-    void onCheckUserResult(boolean isExistence);
+    void onCheckUserResult(List<User> users);
 
     /**
      * 添加用户的结果
@@ -23,4 +27,19 @@ public interface IRegisterViewCallback {
      * @param isSuccess
      */
     void onAddUserResult(boolean isSuccess);
+
+    /**
+     * 查询中
+     */
+    void onQuerying();
+
+    /**
+     * 查询网络出错
+     */
+    void onNetWorkError();
+
+    /**
+     * 查询到的用户为空
+     */
+    void onUserIsEmpty();
 }

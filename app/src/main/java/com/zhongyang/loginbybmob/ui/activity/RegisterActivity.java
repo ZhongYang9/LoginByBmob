@@ -3,14 +3,22 @@ package com.zhongyang.loginbybmob.ui.activity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.base.BaseActivity;
+import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.presenter.IRegisterPresenterImpl;
+import com.zhongyang.loginbybmob.presenter.Impl.RegisterPresenter;
+import com.zhongyang.loginbybmob.view.IRegisterViewCallback;
+
+import java.util.List;
 
 import butterknife.BindView;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements IRegisterViewCallback {
 
+    private static final String TAG = "RegisterActivity";
     @BindView(R.id.ll_register)
     LinearLayout ll_register;
     @BindView(R.id.et_registerAccount)
@@ -19,6 +27,7 @@ public class RegisterActivity extends BaseActivity {
     EditText et_registerPwd;
     @BindView(R.id.et_confirmPwd)
     EditText et_confirmPwd;
+    private IRegisterPresenterImpl mRegisterPresenter;
 
     //------------------------------继承父类实现的一些方法-------------------------
     @Override
@@ -43,9 +52,68 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    private void registerEvent() {
-        //TODO 获取输入框内容
+    @Override
+    protected void setPresenterData() {
+        //获取注册逻辑层的操作对象
+        mRegisterPresenter = RegisterPresenter.getRegisterPresenter();
+        //注册接口，持有引用
+        mRegisterPresenter.registerViewCallback(this);
     }
 
     //------------------------------继承父类实现的一些方法 end-------------------------
+
+    //----------------------------注册逻辑层后实现的方法------------------------
+    @Override
+    public void onCheckUserResult(List<User> users) {
+        //TODO 设置UI状态
+        //账号已经存在
+        Toast.makeText(this, "该用户已存在", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAddUserResult(boolean isSuccess) {
+
+    }
+
+    @Override
+    public void onQuerying() {
+
+    }
+
+    @Override
+    public void onNetWorkError() {
+
+    }
+
+    @Override
+    public void onUserIsEmpty() {
+        //TODO 设置UI状态
+        //用户不存在，可以进行注册
+        Toast.makeText(this, "该账号未注册，可以进行添加操作...", Toast.LENGTH_SHORT).show();
+    }
+    //----------------------------注册逻辑层后实现的方法 end------------------------
+
+    private void registerEvent() {
+        /*获取输入框内容*/
+        String account = et_registerAccount.getText().toString();
+        String password = et_registerPwd.getText().toString();
+        String confirmPwd = et_confirmPwd.getText().toString();
+        /*校验输入框内容*/
+        if (account.isEmpty() || password.isEmpty() || confirmPwd.isEmpty()) {
+            Toast.makeText(this, "关键数据不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!password.equals(confirmPwd)) {
+            Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+            //清空密码输入框
+            et_registerPwd.setText("");
+            et_confirmPwd.setText("");
+            return;
+        }
+        /*给密码加盐*/
+        /*校验用户是否存在*/
+        if (mRegisterPresenter != null) {
+            mRegisterPresenter.checkedUser(account);
+        }
+    }
 }
