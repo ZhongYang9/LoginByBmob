@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.utils.StatusBarUtil;
 
+import butterknife.ButterKnife;
+
 /**
  * @项目名称 LoginByBmob
  * @类名 BaseActivity
@@ -25,6 +27,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getResId());
         //设置状态字体颜色
         setStatusBar();
+        //绑定黄油刀
+        ButterKnife.bind(this);
+        //初始化活动监听事件
+        initListenerEvent();
+    }
+
+    /**
+     * 初始化监听事件，由子类根据情况自行实现
+     */
+    protected void initListenerEvent() {
+
     }
 
     protected abstract int getResId();
