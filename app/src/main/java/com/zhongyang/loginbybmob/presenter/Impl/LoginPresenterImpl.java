@@ -102,7 +102,7 @@ public class LoginPresenterImpl implements ILoginPresenterImpl, ILoginDaoCallbac
 
     private void handlerCheckPwdResult(boolean isCorrect) {
         if (mILoginViewCallback != null) {
-            //判断是否由用户
+            //判断是否有用户
             if (isCorrect) {
                 mILoginViewCallback.onCheckPwdResult(isCorrect);
             } else {

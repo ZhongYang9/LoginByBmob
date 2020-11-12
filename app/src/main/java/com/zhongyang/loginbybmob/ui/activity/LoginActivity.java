@@ -89,9 +89,6 @@ public class LoginActivity extends BaseActivity implements ILoginViewCallback {
     //-------------------实现逻辑层方法------------------------------
     @Override
     public void onCheckAccountResult(List<User> users) {
-        //设置控件显示
-        cl_loggingIn.setVisibility(View.GONE);
-        cl_loginContainer.setVisibility(View.VISIBLE);
         //校验密码
         if (mLoginPresenter != null) {
             mLoginPresenter.checkPwd(mAccount, mPassword);
@@ -100,6 +97,9 @@ public class LoginActivity extends BaseActivity implements ILoginViewCallback {
 
     @Override
     public void onCheckPwdResult(boolean isSuccess) {
+        //设置控件显示
+        cl_loggingIn.setVisibility(View.GONE);
+        cl_loginContainer.setVisibility(View.VISIBLE);
         //密码正确，即可跳转
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         //关闭当前界面

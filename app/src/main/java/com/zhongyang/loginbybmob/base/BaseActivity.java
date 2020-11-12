@@ -32,10 +32,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         setStatusBar();
         //绑定黄油刀
         mBind = ButterKnife.bind(this);
+        //初始化活动组件
+        initActivityView();
         //设置逻辑层相关
         setPresenterData();
         //初始化活动监听事件
         initListenerEvent();
+    }
+
+    protected void initActivityView() {
+
     }
 
     @Override
