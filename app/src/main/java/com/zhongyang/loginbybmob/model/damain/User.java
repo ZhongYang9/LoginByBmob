@@ -1,5 +1,7 @@
 package com.zhongyang.loginbybmob.model.damain;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * @项目名称 LoginByBmob
  * @类名 User
@@ -8,34 +10,34 @@ package com.zhongyang.loginbybmob.model.damain;
  * @作者 钟阳
  * @描述 用户数据实体类
  */
-public class User {
-    private String userName;//用户姓名
-    private String userPwd;//用户密码
-    private String userTel;//用户电话（主键）
+public class User extends BmobObject {
+    private String name;//用户姓名
+    private String telephone;//用户电话（主键）
+    private String password;//用户密码
     private String gender;//用户性别
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUserTel() {
-        return userTel;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setUserTel(String userTel) {
-        this.userTel = userTel;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getGender() {

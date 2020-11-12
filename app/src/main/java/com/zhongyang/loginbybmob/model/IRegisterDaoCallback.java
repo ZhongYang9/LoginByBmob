@@ -37,9 +37,4 @@ public interface IRegisterDaoCallback {
      * 没有查询到用户
      */
     void userIsEmpty();
-
-    /**
-     * 查询中
-     */
-    void querying();
 }

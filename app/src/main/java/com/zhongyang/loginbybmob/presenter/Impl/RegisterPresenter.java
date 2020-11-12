@@ -15,7 +15,7 @@ import java.util.List;
  * @包名 com.zhongyang.loginbybmob.presenter.Impl
  * @创建时间 2020/11/11 15:23
  * @作者 钟阳
- * @描述 登录界面
+ * @描述 注册界面逻辑实现类
  */
 public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCallback {
 
@@ -55,7 +55,10 @@ public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCa
 
     @Override
     public void addUser(User user) {
-        //TODO 处理数据
+        //处理数据，添加用户
+        if (mRegisterDao != null) {
+            mRegisterDao.addUser(user);
+        }
     }
 
     @Override
@@ -82,7 +85,11 @@ public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCa
 
     @Override
     public void onAddUserResult(boolean isSuccess) {
-
+        //Log.d(TAG, "isSuccess is ==> " + isSuccess);
+        //通知结果到UI层
+        if (mRegisterViewCallback != null) {
+            mRegisterViewCallback.onAddUserResult(isSuccess);
+        }
     }
 
     @Override
@@ -99,11 +106,6 @@ public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCa
         if (mRegisterViewCallback != null) {
             mRegisterViewCallback.onUserIsEmpty();
         }
-    }
-
-    @Override
-    public void querying() {
-
     }
     //--------------------------实现注册功能DAO层的方法 end------------------------
 }

@@ -34,6 +34,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
     ConstraintLayout cl_loading;
     @BindView(R.id.cl_container)
     ConstraintLayout cl_container;
+    private String mAccount;
+    private String mPassword;
 
     //------------------------------继承父类实现的一些方法-------------------------
     @Override
@@ -74,13 +76,17 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
         //设置UI状态
         cl_loading.setVisibility(View.GONE);
         cl_container.setVisibility(View.VISIBLE);
-        //账号已经存在
+        //提示用户账号已经存在
         Toast.makeText(this, "该用户已存在", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAddUserResult(boolean isSuccess) {
-
+        //添加用户的结果
+        /*提示用户*/
+        Toast.makeText(this, "注册成功，请登录", Toast.LENGTH_SHORT).show();
+        /*关闭注册界面*/
+        finish();
     }
 
     @Override
@@ -105,21 +111,28 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
         cl_loading.setVisibility(View.GONE);
         cl_container.setVisibility(View.VISIBLE);
         //用户不存在，可以进行注册
-        Toast.makeText(this, "该账号未注册，可以进行添加操作...", Toast.LENGTH_SHORT).show();
+        /*封装数据*/
+        User user = new User();
+        user.setTelephone(mAccount);
+        user.setPassword(mPassword);
+        //交给逻辑层操作
+        if (mRegisterPresenter != null) {
+            mRegisterPresenter.addUser(user);
+        }
     }
     //----------------------------注册逻辑层后实现的方法 end------------------------
 
     private void registerEvent() {
         /*获取输入框内容*/
-        String account = et_registerAccount.getText().toString();
-        String password = et_registerPwd.getText().toString();
+        mAccount = et_registerAccount.getText().toString();
+        mPassword = et_registerPwd.getText().toString();
         String confirmPwd = et_confirmPwd.getText().toString();
         /*校验输入框内容*/
-        if (account.isEmpty() || password.isEmpty() || confirmPwd.isEmpty()) {
+        if (mAccount.isEmpty() || mPassword.isEmpty() || confirmPwd.isEmpty()) {
             Toast.makeText(this, "关键数据不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!password.equals(confirmPwd)) {
+        if (!mPassword.equals(confirmPwd)) {
             Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
             //清空密码输入框
             et_registerPwd.setText("");
@@ -129,7 +142,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
         /*给密码加盐*/
         /*校验用户是否存在*/
         if (mRegisterPresenter != null) {
-            mRegisterPresenter.checkedUser(account);
+            mRegisterPresenter.checkedUser(mAccount);
         }
     }
 }
