@@ -17,25 +17,25 @@ import java.util.List;
  * @作者 钟阳
  * @描述 注册界面逻辑实现类
  */
-public class RegisterPresenter implements IRegisterPresenterImpl, IRegisterDaoCallback {
+public class RegisterPresenterImpl implements IRegisterPresenterImpl, IRegisterDaoCallback {
 
     private static final String TAG = "RegisterPresenter";
     private IRegisterViewCallback mRegisterViewCallback = null;
     private final IRegisterDaoImpl mRegisterDao;
 
     //单例
-    private RegisterPresenter() {
+    private RegisterPresenterImpl() {
         //获取M层DAO数据对象
         mRegisterDao = RegisterDao.getRegisterDao();
         //注册接口过去
         mRegisterDao.setViewCallback(this);
     }
 
-    private static RegisterPresenter sRegisterPresenter = null;
+    private static RegisterPresenterImpl sRegisterPresenter = null;
 
-    public static RegisterPresenter getRegisterPresenter() {
+    public static RegisterPresenterImpl getRegisterPresenter() {
         if (sRegisterPresenter == null) {
-            sRegisterPresenter = new RegisterPresenter();
+            sRegisterPresenter = new RegisterPresenterImpl();
         }
         return sRegisterPresenter;
     }

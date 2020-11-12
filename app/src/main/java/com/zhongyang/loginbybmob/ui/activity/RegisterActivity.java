@@ -11,7 +11,7 @@ import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.base.BaseActivity;
 import com.zhongyang.loginbybmob.model.domain.User;
 import com.zhongyang.loginbybmob.presenter.IRegisterPresenterImpl;
-import com.zhongyang.loginbybmob.presenter.Impl.RegisterPresenter;
+import com.zhongyang.loginbybmob.presenter.Impl.RegisterPresenterImpl;
 import com.zhongyang.loginbybmob.view.IRegisterViewCallback;
 
 import java.util.List;
@@ -63,9 +63,17 @@ public class RegisterActivity extends BaseActivity implements IRegisterViewCallb
     @Override
     protected void setPresenterData() {
         //获取注册逻辑层的操作对象
-        mRegisterPresenter = RegisterPresenter.getRegisterPresenter();
+        mRegisterPresenter = RegisterPresenterImpl.getRegisterPresenter();
         //注册接口，持有引用
         mRegisterPresenter.registerViewCallback(this);
+    }
+
+    @Override
+    protected void release() {
+        //释放资源
+        if (mRegisterPresenter != null) {
+            mRegisterPresenter.unRegisterViewCallback(this);
+        }
     }
 
     //------------------------------继承父类实现的一些方法 end-------------------------

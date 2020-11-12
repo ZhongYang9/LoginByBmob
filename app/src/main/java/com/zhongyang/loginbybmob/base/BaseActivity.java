@@ -9,6 +9,7 @@ import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.utils.StatusBarUtil;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @项目名称 LoginByBmob
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private Unbinder mBind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +31,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         //设置状态字体颜色
         setStatusBar();
         //绑定黄油刀
-        ButterKnife.bind(this);
+        mBind = ButterKnife.bind(this);
         //设置逻辑层相关
         setPresenterData();
         //初始化活动监听事件
         initListenerEvent();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //释放资源
+        if (mBind != null) {
+            mBind.unbind();
+        }
+        //调用取消注册方法
+        this.release();
+    }
+
+    /**
+     * 释放资源的方法，由子类根据情况去调用
+     */
+    protected void release() {
+
     }
 
     /**

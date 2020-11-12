@@ -37,4 +37,14 @@ public interface ILoginViewCallback {
      * 网络错误
      */
     void onNetWorkError();
+
+    /**
+     * 数据为空，即没得用户
+     */
+    void onEmpty();
+
+    /**
+     * 密码错误
+     */
+    void onPwdError();
 }
