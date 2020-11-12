@@ -3,7 +3,7 @@ package com.zhongyang.loginbybmob.presenter.Impl;
 import com.zhongyang.loginbybmob.model.IRegisterDaoCallback;
 import com.zhongyang.loginbybmob.model.IRegisterDaoImpl;
 import com.zhongyang.loginbybmob.model.RegisterDao;
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 import com.zhongyang.loginbybmob.presenter.IRegisterPresenterImpl;
 import com.zhongyang.loginbybmob.view.IRegisterViewCallback;
 

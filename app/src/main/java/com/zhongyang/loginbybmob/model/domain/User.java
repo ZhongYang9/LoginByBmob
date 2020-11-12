@@ -1,4 +1,4 @@
-package com.zhongyang.loginbybmob.model.damain;
+package com.zhongyang.loginbybmob.model.domain;
 
 import cn.bmob.v3.BmobObject;
 

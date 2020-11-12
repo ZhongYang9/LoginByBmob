@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.zhongyang.loginbybmob.R;
 import com.zhongyang.loginbybmob.base.BaseActivity;
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 import com.zhongyang.loginbybmob.presenter.IRegisterPresenterImpl;
 import com.zhongyang.loginbybmob.presenter.Impl.RegisterPresenter;
 import com.zhongyang.loginbybmob.view.IRegisterViewCallback;

@@ -1,6 +1,6 @@
 package com.zhongyang.loginbybmob.model;
 
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 
 /**
  * @项目名称 LoginByBmob

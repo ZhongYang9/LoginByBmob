@@ -2,7 +2,7 @@ package com.zhongyang.loginbybmob.model;
 
 import android.util.Log;
 
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 
 import java.util.List;
 

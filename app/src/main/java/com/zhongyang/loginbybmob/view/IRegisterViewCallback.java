@@ -1,6 +1,6 @@
 package com.zhongyang.loginbybmob.view;
 
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 
 import java.util.List;
 

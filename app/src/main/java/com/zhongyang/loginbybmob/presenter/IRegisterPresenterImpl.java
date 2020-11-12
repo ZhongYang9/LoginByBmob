@@ -1,6 +1,6 @@
 package com.zhongyang.loginbybmob.presenter;
 
-import com.zhongyang.loginbybmob.model.damain.User;
+import com.zhongyang.loginbybmob.model.domain.User;
 import com.zhongyang.loginbybmob.view.IRegisterViewCallback;
 
 /**
